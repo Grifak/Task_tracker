@@ -6,16 +6,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(description = "Задача")
 public class TaskRequestDto {
     @Schema(description = "ID Задача")
-    private Long task_id;
+    private Long taskId;
 
     @Schema(description = "ID автора")
-    private Long author_id;
+    private Long authorId;
 
     @Schema(description = "ID проекта")
-    private Long project_id;
+    private Long projectId;
 
     @Schema(description = "ID версии")
-    private Long release_id;
+    private Long releaseId;
 
     @Schema(description = "Название здачи")
     private String name;
@@ -26,46 +26,46 @@ public class TaskRequestDto {
     public TaskRequestDto() {
     }
 
-    public TaskRequestDto(Long task_id, Long author_id, Long project_id,
-                          Long release_id, String name, TaskStatus status) {
-        this.task_id = task_id;
-        this.author_id = author_id;
-        this.project_id = project_id;
-        this.release_id = release_id;
+    public TaskRequestDto(Long taskId, Long authorId, Long projectId,
+                          Long releaseId, String name, TaskStatus status) {
+        this.taskId = taskId;
+        this.authorId = authorId;
+        this.projectId = projectId;
+        this.releaseId = releaseId;
         this.name = name;
         this.status = status;
     }
 
-    public Long getAuthor_id() {
-        return author_id;
+    public Long getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor_id(Long author_id) {
-        this.author_id = author_id;
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
     }
 
-    public Long getProject_id() {
-        return project_id;
+    public Long getProjectId() {
+        return projectId;
     }
 
-    public void setProject_id(Long project_id) {
-        this.project_id = project_id;
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 
-    public Long getRelease_id() {
-        return release_id;
+    public Long getReleaseId() {
+        return releaseId;
     }
 
-    public void setRelease_id(Long release_id) {
-        this.release_id = release_id;
+    public void setReleaseId(Long releaseId) {
+        this.releaseId = releaseId;
     }
 
-    public Long getTask_id() {
-        return task_id;
+    public Long getTaskId() {
+        return taskId;
     }
 
-    public void setTask_id(Long task_id) {
-        this.task_id = task_id;
+    public void setTaskId(Long taskId) {
+        this.taskId = taskId;
     }
 
     public String getName() {

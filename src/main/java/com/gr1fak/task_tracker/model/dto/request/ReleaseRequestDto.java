@@ -7,7 +7,7 @@ import java.util.Calendar;
 @Schema(description = "Версия")
 public class ReleaseRequestDto {
     @Schema(description = "ID версии")
-    private Long release_id;
+    private Long releaseId;
 
     @Schema(description = "Название задачи")
     private String name;
@@ -22,18 +22,18 @@ public class ReleaseRequestDto {
     }
 
     public ReleaseRequestDto(Long release_id, String name, Calendar begin, Calendar end) {
-        this.release_id = release_id;
+        this.releaseId = release_id;
         this.name = name;
         this.begin = begin;
         this.end = end;
     }
 
-    public Long getRelease_id() {
-        return release_id;
+    public Long getReleaseId() {
+        return releaseId;
     }
 
-    public void setRelease_id(Long release_id) {
-        this.release_id = release_id;
+    public void setReleaseId(Long releaseId) {
+        this.releaseId = releaseId;
     }
 
     public String getName() {

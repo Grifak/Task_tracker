@@ -12,8 +12,7 @@ public enum TaskStatus {
         this.title = title;
     }
 
-    @Override
-    public String toString() {
+    public String getTitle() {
         return title;
     }
 }

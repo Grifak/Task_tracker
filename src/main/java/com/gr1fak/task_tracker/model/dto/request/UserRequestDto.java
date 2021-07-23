@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(description = "Пользователь")
 public class UserRequestDto {
     @Schema(description = "ID пользователя")
-    private Long user_id;
+    private Long userId;
 
     @Schema(description = "Логин пользователя")
     private String login;
@@ -16,19 +16,19 @@ public class UserRequestDto {
     @Schema(description = "Емайл пользователя")
     private String email;
 
-    public UserRequestDto(Long user_id, String login, String password, String email) {
-        this.user_id = user_id;
+    public UserRequestDto(Long userId, String login, String password, String email) {
+        this.userId = userId;
         this.login = login;
         this.password = password;
         this.email = email;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getLogin() {

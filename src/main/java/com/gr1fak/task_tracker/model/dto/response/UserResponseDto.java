@@ -19,9 +19,6 @@ public class UserResponseDto {
         this.email = email;
     }
 
-    public UserResponseDto(String user1, String password) {
-    }
-
     public String getLogin() {
         return login;
     }

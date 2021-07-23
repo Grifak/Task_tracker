@@ -6,11 +6,19 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.IOException;
 import java.util.List;
 
+@RequestMapping("/api/user")
 @Tag(name = "Пользователи")
 @RestController
 public class UserController {
@@ -18,8 +26,8 @@ public class UserController {
     @Operation(summary = "Получить список пользователей")
     @GetMapping(value = "/users")
     public ResponseEntity<List<UserResponseDto>> getUsers(){
-        UserResponseDto user = new UserResponseDto("user1", "1234");
-        UserResponseDto user2 = new UserResponseDto("user2", "12345");
+        UserResponseDto user = new UserResponseDto("user1", "1234", "us@mail.ru");
+        UserResponseDto user2 = new UserResponseDto("user2", "123456","us1@mail.ru");
 
         List<UserResponseDto> res = List.of(user, user2);
 
@@ -31,7 +39,8 @@ public class UserController {
     public ResponseEntity<UserResponseDto> createUser(@RequestBody UserRequestDto requestDto){
         //TODO добавление в БД
 
-        return ResponseEntity.ok().body(new UserResponseDto(requestDto.getLogin(), requestDto.getPassword()));
+        return ResponseEntity.ok().body(new UserResponseDto(requestDto.getLogin(), requestDto.getPassword(),
+                requestDto.getEmail()));
     }
 
     @Operation(summary = "Обновление пользователя")
@@ -40,7 +49,8 @@ public class UserController {
                                                       @RequestBody UserRequestDto requestDto){
         //TODO обновление сущности
 
-        return ResponseEntity.ok().body(new UserResponseDto(requestDto.getLogin(), requestDto.getPassword()));
+        return ResponseEntity.ok().body(new UserResponseDto(requestDto.getLogin(), requestDto.getPassword(),
+                requestDto.getEmail()));
     }
 
     @Operation(summary = "Удаление пользователя")
