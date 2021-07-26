@@ -3,19 +3,21 @@ package com.gr1fak.task_tracker.dto.request;
 import com.gr1fak.task_tracker.dto.enums.TaskStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.util.UUID;
+
 @Schema(description = "Задача")
 public class TaskRequestDto {
     @Schema(description = "ID Задача")
-    private Long taskId;
+    private UUID taskId;
 
     @Schema(description = "ID автора")
-    private Long authorId;
+    private UUID authorId;
 
     @Schema(description = "ID проекта")
-    private Long projectId;
+    private UUID projectId;
 
     @Schema(description = "ID версии")
-    private Long releaseId;
+    private UUID releaseId;
 
     @Schema(description = "Название здачи")
     private String name;
@@ -26,8 +28,8 @@ public class TaskRequestDto {
     public TaskRequestDto() {
     }
 
-    public TaskRequestDto(Long taskId, Long authorId, Long projectId,
-                          Long releaseId, String name, TaskStatus status) {
+    public TaskRequestDto(UUID taskId, UUID authorId, UUID projectId,
+                          UUID releaseId, String name, TaskStatus status) {
         this.taskId = taskId;
         this.authorId = authorId;
         this.projectId = projectId;
@@ -36,35 +38,35 @@ public class TaskRequestDto {
         this.status = status;
     }
 
-    public Long getAuthorId() {
+    public UUID getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(Long authorId) {
+    public void setAuthorId(UUID authorId) {
         this.authorId = authorId;
     }
 
-    public Long getProjectId() {
+    public UUID getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(Long projectId) {
+    public void setProjectId(UUID projectId) {
         this.projectId = projectId;
     }
 
-    public Long getReleaseId() {
+    public UUID getReleaseId() {
         return releaseId;
     }
 
-    public void setReleaseId(Long releaseId) {
+    public void setReleaseId(UUID releaseId) {
         this.releaseId = releaseId;
     }
 
-    public Long getTaskId() {
+    public UUID getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(Long taskId) {
+    public void setTaskId(UUID taskId) {
         this.taskId = taskId;
     }
 

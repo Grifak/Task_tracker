@@ -19,12 +19,12 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@RequestMapping("/api/release")
+@RequestMapping("/api/releases")
 @Tag(name = "Версии")
 @RestController
 public class ReleaseController {
     @Operation(summary = "Получить список версий")
-    @GetMapping(value = "/project")
+    @GetMapping(value = "/release")
     public ResponseEntity<List<ReleaseResponseDto>> getRelease() {
         ReleaseResponseDto release1 = new ReleaseResponseDto("release1", LocalDateTime.now(),
                 LocalDateTime.now());
@@ -36,7 +36,7 @@ public class ReleaseController {
     }
 
     @Operation(summary = "Добавить версию")
-    @PostMapping(value = "/project")
+    @PostMapping(value = "/release")
     public ResponseEntity<ReleaseResponseDto> createTask(@RequestBody ReleaseRequestDto requestDto) {
         //TODO добавление
 
@@ -45,7 +45,7 @@ public class ReleaseController {
     }
 
     @Operation(summary = "Обновление версии")
-    @PutMapping(value = "/project/{id}")
+    @PutMapping(value = "/release/{id}")
     public ResponseEntity<ReleaseResponseDto> partialUpdateTask(@PathVariable Long id,
                                                              @RequestBody ReleaseRequestDto requestDto) {
         //TODO обновление сущности
@@ -54,7 +54,7 @@ public class ReleaseController {
     }
 
     @Operation(summary = "Удаление версии")
-    @DeleteMapping(value = "/project/{id}")
+    @DeleteMapping(value = "/release/{id}")
     public ResponseEntity partialUpdateTask(@PathVariable Long id) {
         //TODO удаление сущности
 

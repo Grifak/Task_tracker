@@ -2,10 +2,12 @@ package com.gr1fak.task_tracker.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.util.UUID;
+
 @Schema(description = "Пользователь")
 public class UserRequestDto {
     @Schema(description = "ID пользователя")
-    private Long userId;
+    private UUID userId;
 
     @Schema(description = "Логин пользователя")
     private String login;
@@ -16,18 +18,18 @@ public class UserRequestDto {
     @Schema(description = "Емайл пользователя")
     private String email;
 
-    public UserRequestDto(Long userId, String login, String password, String email) {
+    public UserRequestDto(UUID userId, String login, String password, String email) {
         this.userId = userId;
         this.login = login;
         this.password = password;
         this.email = email;
     }
 
-    public Long getUserId() {
+    public UUID getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(UUID userId) {
         this.userId = userId;
     }
 

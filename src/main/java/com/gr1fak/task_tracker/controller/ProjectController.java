@@ -23,7 +23,7 @@ import java.io.IOException;
 @RestController
 public class ProjectController {
     @Operation(summary = "Получить проект")
-    @GetMapping(value = "/project")
+    @GetMapping(value = "/projects")
     public ResponseEntity<ProjectResponseDto> getRelease() {
         ProjectResponseDto project = new ProjectResponseDto("task-tacker", "cool project",
                 ProjectStatus.STARTED, "Dmitriy");

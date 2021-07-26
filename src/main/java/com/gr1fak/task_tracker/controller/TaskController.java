@@ -24,7 +24,7 @@ import java.util.List;
 @RestController
 public class TaskController {
     @Operation(summary = "Получить список задач")
-    @GetMapping(value = "/project")
+    @GetMapping(value = "/tasks")
     public ResponseEntity<List<TaskResponseDto>> getTasks() {
         TaskResponseDto task = new TaskResponseDto("task1", TaskStatus.IN_PROGRESS);
         TaskResponseDto task2 = new TaskResponseDto("task2", TaskStatus.BACKLOG);
@@ -34,7 +34,7 @@ public class TaskController {
     }
 
     @Operation(summary = "Добавить задачу")
-    @PostMapping(value = "/project")
+    @PostMapping(value = "/tasks")
     public ResponseEntity<TaskResponseDto> createTask(@RequestBody TaskRequestDto requestDto) {
         //TODO добавление
 
@@ -42,7 +42,7 @@ public class TaskController {
     }
 
     @Operation(summary = "Обновление задачи")
-    @PutMapping(value = "/project/{id}")
+    @PutMapping(value = "/tasks/{id}")
     public ResponseEntity<TaskResponseDto> partialUpdateTask(@PathVariable Long id,
                                                              @RequestBody TaskRequestDto requestDto) {
         //TODO обновление сущности
@@ -50,7 +50,7 @@ public class TaskController {
     }
 
     @Operation(summary = "Удаление задачи")
-    @DeleteMapping(value = "/project/{id}")
+    @DeleteMapping(value = "/tasks/{id}")
     public ResponseEntity partialUpdateTask(@PathVariable Long id) {
         //TODO удаление сущности
 
