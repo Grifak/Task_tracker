@@ -1,7 +1,7 @@
 package com.gr1fak.task_tracker.controller;
 
-import com.gr1fak.task_tracker.model.dto.request.UserRequestDto;
-import com.gr1fak.task_tracker.model.dto.response.UserResponseDto;
+import com.gr1fak.task_tracker.dto.request.UserRequestDto;
+import com.gr1fak.task_tracker.dto.response.UserResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;

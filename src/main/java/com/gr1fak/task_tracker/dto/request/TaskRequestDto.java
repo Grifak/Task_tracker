@@ -1,6 +1,6 @@
-package com.gr1fak.task_tracker.model.dto.request;
+package com.gr1fak.task_tracker.dto.request;
 
-import com.gr1fak.task_tracker.model.dto.enums.TaskStatus;
+import com.gr1fak.task_tracker.dto.enums.TaskStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "Задача")

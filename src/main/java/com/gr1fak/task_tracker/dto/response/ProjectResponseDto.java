@@ -1,13 +1,10 @@
-package com.gr1fak.task_tracker.model.dto.request;
+package com.gr1fak.task_tracker.dto.response;
 
-import com.gr1fak.task_tracker.model.dto.enums.ProjectStatus;
+import com.gr1fak.task_tracker.dto.enums.ProjectStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "Проект")
-public class ProjectRequestDto {
-
-    @Schema(description = "ID проекта")
-    private Long projectId;
+public class ProjectResponseDto {
 
     @Schema(description = "Название проекта")
     private String name;
@@ -21,12 +18,8 @@ public class ProjectRequestDto {
     @Schema(description = "Заказдчик проекта")
     private String customer;
 
-    public ProjectRequestDto() {
-    }
-
-    public ProjectRequestDto(Long projectId, String name, String description,
-                             ProjectStatus status, String customer) {
-        this.projectId = projectId;
+    public ProjectResponseDto(String name, String description,
+                              ProjectStatus status, String customer) {
         this.name = name;
         this.description = description;
         this.status = status;
@@ -49,7 +42,7 @@ public class ProjectRequestDto {
         this.description = description;
     }
 
-    public ProjectStatus getStatus() {
+    public ProjectStatus isStatus() {
         return status;
     }
 
@@ -64,5 +57,4 @@ public class ProjectRequestDto {
     public void setCustomer(String customer) {
         this.customer = customer;
     }
-
 }

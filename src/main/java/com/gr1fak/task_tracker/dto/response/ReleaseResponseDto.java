@@ -1,8 +1,8 @@
-package com.gr1fak.task_tracker.model.dto.response;
+package com.gr1fak.task_tracker.dto.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 @Schema(description = "Версия")
 public class ReleaseResponseDto {
@@ -10,12 +10,12 @@ public class ReleaseResponseDto {
     private String name;
 
     @Schema(description = "Начало задачи")
-    private Calendar begin;
+    private LocalDateTime begin;
 
     @Schema(description = "Конец задачи")
-    private Calendar end;
+    private LocalDateTime end;
 
-    public ReleaseResponseDto(String name, Calendar begin, Calendar end) {
+    public ReleaseResponseDto(String name, LocalDateTime begin, LocalDateTime end) {
         this.name = name;
         this.begin = begin;
         this.end = end;
@@ -29,19 +29,19 @@ public class ReleaseResponseDto {
         this.name = name;
     }
 
-    public Calendar getBegin() {
+    public LocalDateTime getBegin() {
         return begin;
     }
 
-    public void setBegin(Calendar begin) {
+    public void setBegin(LocalDateTime begin) {
         this.begin = begin;
     }
 
-    public Calendar getEnd() {
+    public LocalDateTime getEnd() {
         return end;
     }
 
-    public void setEnd(Calendar end) {
+    public void setEnd(LocalDateTime end) {
         this.end = end;
     }
 }

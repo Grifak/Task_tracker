@@ -1,9 +1,12 @@
-package com.gr1fak.task_tracker.model.dto.response;
+package com.gr1fak.task_tracker.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "Пользователь")
-public class UserResponseDto {
+public class UserRequestDto {
+    @Schema(description = "ID пользователя")
+    private Long userId;
+
     @Schema(description = "Логин пользователя")
     private String login;
 
@@ -13,10 +16,19 @@ public class UserResponseDto {
     @Schema(description = "Емайл пользователя")
     private String email;
 
-    public UserResponseDto(String login, String password, String email) {
+    public UserRequestDto(Long userId, String login, String password, String email) {
+        this.userId = userId;
         this.login = login;
         this.password = password;
         this.email = email;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getLogin() {
@@ -42,5 +54,4 @@ public class UserResponseDto {
     public void setEmail(String email) {
         this.email = email;
     }
-
 }

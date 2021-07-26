@@ -1,8 +1,8 @@
-package com.gr1fak.task_tracker.model.dto.request;
+package com.gr1fak.task_tracker.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 @Schema(description = "Версия")
 public class ReleaseRequestDto {
@@ -13,15 +13,15 @@ public class ReleaseRequestDto {
     private String name;
 
     @Schema(description = "Начало проекта")
-    private Calendar begin;
+    private LocalDateTime begin;
 
     @Schema(description = "Окночание задачи")
-    private Calendar end;
+    private LocalDateTime end;
 
     public ReleaseRequestDto() {
     }
 
-    public ReleaseRequestDto(Long release_id, String name, Calendar begin, Calendar end) {
+    public ReleaseRequestDto(Long release_id, String name, LocalDateTime begin, LocalDateTime end) {
         this.releaseId = release_id;
         this.name = name;
         this.begin = begin;
@@ -44,19 +44,19 @@ public class ReleaseRequestDto {
         this.name = name;
     }
 
-    public Calendar getBegin() {
+    public LocalDateTime getBegin() {
         return begin;
     }
 
-    public void setBegin(Calendar begin) {
+    public void setBegin(LocalDateTime begin) {
         this.begin = begin;
     }
 
-    public Calendar getEnd() {
+    public LocalDateTime getEnd() {
         return end;
     }
 
-    public void setEnd(Calendar end) {
+    public void setEnd(LocalDateTime end) {
         this.end = end;
     }
 }

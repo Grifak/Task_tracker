@@ -1,7 +1,7 @@
 package com.gr1fak.task_tracker.controller;
 
-import com.gr1fak.task_tracker.model.dto.request.ReleaseRequestDto;
-import com.gr1fak.task_tracker.model.dto.response.ReleaseResponseDto;
+import com.gr1fak.task_tracker.dto.request.ReleaseRequestDto;
+import com.gr1fak.task_tracker.dto.response.ReleaseResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.IOException;
-import java.util.GregorianCalendar;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RequestMapping("/api/release")
@@ -26,10 +26,10 @@ public class ReleaseController {
     @Operation(summary = "Получить список версий")
     @GetMapping(value = "/project")
     public ResponseEntity<List<ReleaseResponseDto>> getRelease() {
-        ReleaseResponseDto release1 = new ReleaseResponseDto("release1", new GregorianCalendar(2021, 07, 20),
-                new GregorianCalendar(2021, 07, 22));
-        ReleaseResponseDto release2 = new ReleaseResponseDto("release2", new GregorianCalendar(2021, 07, 20),
-                new GregorianCalendar(2021, 07, 25));
+        ReleaseResponseDto release1 = new ReleaseResponseDto("release1", LocalDateTime.now(),
+                LocalDateTime.now());
+        ReleaseResponseDto release2 = new ReleaseResponseDto("release2", LocalDateTime.now(),
+                LocalDateTime.now());
 
         List<ReleaseResponseDto> results =  List.of(release1, release2);
         return ResponseEntity.ok().body(results);

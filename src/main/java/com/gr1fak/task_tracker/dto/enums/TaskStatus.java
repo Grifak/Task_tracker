@@ -1,4 +1,4 @@
-package com.gr1fak.task_tracker.model.dto.enums;
+package com.gr1fak.task_tracker.dto.enums;
 
 public enum TaskStatus {
 
