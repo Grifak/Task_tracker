@@ -21,13 +21,13 @@ public class ReleaseEntity {
     @Column(name  = "release_id")
     private UUID id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "begin")
+    @Column(name = "begin", nullable = false)
     private LocalDateTime begin;
 
-    @Column(name = "end")
+    @Column(name = "end", nullable = false)
     private LocalDateTime end;
 
     public ReleaseEntity(String name, LocalDateTime begin, LocalDateTime end) {

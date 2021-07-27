@@ -22,16 +22,16 @@ public class ProjectEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID projectId;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     private ProjectStatus status;
 
-    @Column(name = "customer")
+    @Column(name = "customer", nullable = false)
     private String customer;
 
     @OneToMany

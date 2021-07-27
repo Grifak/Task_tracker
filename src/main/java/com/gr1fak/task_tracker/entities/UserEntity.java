@@ -19,13 +19,13 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID userId;
 
-    @Column(name = "Login")
+    @Column(name = "Login", nullable = false)
     private String login;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
     @ManyToMany(mappedBy = "users")

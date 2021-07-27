@@ -22,10 +22,10 @@ public class TaskEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     private TaskStatus status;
 
     @OneToOne(cascade = CascadeType.ALL)
