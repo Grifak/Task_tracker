@@ -17,6 +17,10 @@ public class TaskResponseDto {
         this.status = status;
     }
 
+    public TaskResponseDto() {
+
+    }
+
     public String getName() {
         return name;
     }

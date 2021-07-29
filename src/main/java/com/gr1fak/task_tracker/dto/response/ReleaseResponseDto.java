@@ -21,6 +21,10 @@ public class ReleaseResponseDto {
         this.end = end;
     }
 
+    public ReleaseResponseDto() {
+
+    }
+
     public String getName() {
         return name;
     }

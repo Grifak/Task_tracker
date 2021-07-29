@@ -26,6 +26,10 @@ public class ProjectResponseDto {
         this.customer = customer;
     }
 
+    public ProjectResponseDto() {
+
+    }
+
     public String getName() {
         return name;
     }
