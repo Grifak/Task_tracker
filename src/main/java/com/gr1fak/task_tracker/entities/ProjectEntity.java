@@ -14,8 +14,8 @@ import javax.persistence.JoinColumn;
 import java.util.List;
 import java.util.UUID;
 
-@Table(name = "project")
 @Entity
+@Table(name = "project")
 public class ProjectEntity {
     @Id
     @Column(name = "project_id")

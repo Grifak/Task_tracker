@@ -8,18 +8,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 public class UserEntity {
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID userId;
 
-    @Column(name = "Login", nullable = false)
+    @Column(name = "login", nullable = false)
     private String login;
 
     @Column(name = "password", nullable = false)
@@ -28,8 +28,8 @@ public class UserEntity {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @ManyToMany(mappedBy = "users")
-    List<TaskEntity> tasks;
+    @ManyToMany
+    private Set<TaskEntity> tasks;
 
     public UserEntity(String login, String password, String email) {
         this.login = login;

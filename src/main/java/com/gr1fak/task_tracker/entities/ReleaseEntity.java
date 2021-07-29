@@ -27,7 +27,7 @@ public class ReleaseEntity {
     @Column(name = "begin", nullable = false)
     private LocalDateTime begin;
 
-    @Column(name = "end", nullable = false)
+    @Column(name = "ending", nullable = false)
     private LocalDateTime end;
 
     public ReleaseEntity(String name, LocalDateTime begin, LocalDateTime end) {
