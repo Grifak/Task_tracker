@@ -8,9 +8,10 @@
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <include file="db/changelog/v-1.0/01-changeset-project-table.xml"/>
-    <include file="db/changelog/v-1.0/10-changeset-release-table.xml"/>
-    <include file="db/changelog/v-1.0/20-changeset-user-table.xml"/>
-    <include file="db/changelog/v-1.0/30-changeset-task-table.xml"/>
+    <include file="db/changelog/v-1.0/10-changeset-users-table.xml"/>
+    <include file="db/changelog/v-1.0/20-changeset-task-table.xml"/>
+    <include file="db/changelog/v-1.0/30-changeset-release-table.xml"/>
+    <include file="db/changelog/v-1.0/31-changeset-task-table-relation.xml"/>
     <include file="db/changelog/v-1.0/40-changeset-user_task-table.xml"/>
 
 </databaseChangeLog>

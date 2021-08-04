@@ -2,8 +2,10 @@ package com.gr1fak.task_tracker.controller;
 
 import com.gr1fak.task_tracker.dto.request.UserRequestDto;
 import com.gr1fak.task_tracker.dto.response.UserResponseDto;
+import com.gr1fak.task_tracker.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,35 +19,38 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @RequestMapping("/api/user")
 @Tag(name = "Пользователи")
 @RestController
 public class UserController {
+    private final UserService userService;
 
-    @Operation(summary = "Получить список пользователей")
-    @GetMapping(value = "/users")
-    public ResponseEntity<List<UserResponseDto>> getUsers(){
-        UserResponseDto user = new UserResponseDto("user1", "1234", "us@mail.ru");
-        UserResponseDto user2 = new UserResponseDto("user2", "123456","us1@mail.ru");
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
-        List<UserResponseDto> res = List.of(user, user2);
+    @Operation(summary = "Получить пользователя")
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<UserResponseDto> getUser(@PathVariable UUID id){
+        UserResponseDto responseDto = userService.getById(id);
 
-        return ResponseEntity.ok().body(res);
+        return ResponseEntity.ok().body(responseDto);
     }
 
     @Operation(summary = "Добвить пользователя")
-    @PostMapping(value = "/users")
+    @PostMapping(value = "/user")
     public ResponseEntity<UserResponseDto> createUser(@RequestBody UserRequestDto requestDto){
-        //TODO добавление в БД
+        UserResponseDto responseDto = userService.addUser(requestDto);
 
-        return ResponseEntity.ok().body(new UserResponseDto(requestDto.getLogin(), requestDto.getPassword(),
-                requestDto.getEmail()));
+        return ResponseEntity.ok().body(responseDto);
     }
 
     @Operation(summary = "Обновление пользователя")
-    @PutMapping(value = "/users/{id}")
-    public ResponseEntity<UserResponseDto> updateUser(@PathVariable Long id,
+    @PutMapping(value = "/user/{id}")
+    public ResponseEntity<UserResponseDto> updateUser(@PathVariable UUID id,
                                                       @RequestBody UserRequestDto requestDto){
         //TODO обновление сущности
 
@@ -54,16 +59,9 @@ public class UserController {
     }
 
     @Operation(summary = "Удаление пользователя")
-    @DeleteMapping(value = "/users/{id}")
-    public ResponseEntity deleteUser(@PathVariable Long id){
-        //TODO удаление сущности
-
+    @DeleteMapping(value = "/user/{id}")
+    public ResponseEntity deleteUser(@PathVariable UUID id){
+        userService.deleteUser(id);
         return ResponseEntity.ok().build();
-    }
-
-    @ExceptionHandler(IOException.class)
-    public ResponseEntity handleException(IOException e) {
-
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 }

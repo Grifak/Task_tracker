@@ -1,6 +1,7 @@
 package com.gr1fak.task_tracker.dto.response;
 
-import com.gr1fak.task_tracker.dto.enums.TaskStatus;
+
+import com.gr1fak.task_tracker.enums.TaskStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "Задача")
@@ -29,8 +30,8 @@ public class TaskResponseDto {
         this.name = name;
     }
 
-    public TaskStatus getStatus() {
-        return status;
+    public String getStatus() {
+        return status.getTitle();
     }
 
     public void setStatus(TaskStatus status) {

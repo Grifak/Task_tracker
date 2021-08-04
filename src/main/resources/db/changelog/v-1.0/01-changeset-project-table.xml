@@ -20,7 +20,7 @@
 
             <column name="description" type="TEXT"/>
 
-            <column name="status" type="INTEGER">
+            <column name="status" type="VARCHAR">
                 <constraints nullable="false"/>
             </column>
 

@@ -1,7 +1,6 @@
-package com.gr1fak.task_tracker.dto.enums;
+package com.gr1fak.task_tracker.enums;
 
 public enum TaskStatus {
-
     BACKLOG("Backlog"),
     IN_PROGRESS("In progress"),
     DONE("Done");

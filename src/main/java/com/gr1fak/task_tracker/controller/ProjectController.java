@@ -1,10 +1,12 @@
 package com.gr1fak.task_tracker.controller;
 
-import com.gr1fak.task_tracker.dto.enums.ProjectStatus;
 import com.gr1fak.task_tracker.dto.request.ProjectRequestDto;
 import com.gr1fak.task_tracker.dto.response.ProjectResponseDto;
+import com.gr1fak.task_tracker.service.ProjectService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import javassist.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,32 +19,38 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.IOException;
+import java.util.UUID;
+
 
 @RequestMapping("/api/project")
 @Tag(name = "Проект")
 @RestController
 public class ProjectController {
-    @Operation(summary = "Получить проект")
-    @GetMapping(value = "/projects")
-    public ResponseEntity<ProjectResponseDto> getRelease() {
-        ProjectResponseDto project = new ProjectResponseDto("task-tacker", "cool project",
-                ProjectStatus.STARTED, "Dmitriy");
+    private final ProjectService projectService;
 
-        return ResponseEntity.ok().body(project);
+    @Autowired
+    public ProjectController(ProjectService projectService) {
+        this.projectService = projectService;
+    }
+
+    @Operation(summary = "Получить проект")
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ProjectResponseDto> getProject(@PathVariable UUID id) {
+        ProjectResponseDto responseDto = projectService.getById(id);
+        return ResponseEntity.ok().body(responseDto);
     }
 
     @Operation(summary = "Добавить проект")
     @PostMapping(value = "/project")
-    public ResponseEntity<ProjectResponseDto> createTask(@RequestBody ProjectRequestDto requestDto) {
-        //TODO добавление
+    public ResponseEntity<ProjectResponseDto> createProject(@RequestBody ProjectRequestDto requestDto) {
+        ProjectResponseDto responseDto = projectService.addProject(requestDto);
 
-        return ResponseEntity.ok().body(new ProjectResponseDto(requestDto.getName(), requestDto.getDescription(),
-                requestDto.getStatus(), requestDto.getCustomer()));
+        return ResponseEntity.ok().body(responseDto);
     }
 
     @Operation(summary = "Обновление проекта")
     @PutMapping(value = "/project/{id}")
-    public ResponseEntity<ProjectResponseDto> partialUpdateTask(@PathVariable Long id,
+    public ResponseEntity<ProjectResponseDto> partialUpdateProject(@PathVariable UUID id,
                                                                 @RequestBody ProjectRequestDto requestDto) {
         //TODO обновление сущности
         return ResponseEntity.ok().body(new ProjectResponseDto(requestDto.getName(), requestDto.getDescription(),
@@ -51,16 +59,10 @@ public class ProjectController {
 
     @Operation(summary = "Удаление проекта")
     @DeleteMapping(value = "/project/{id}")
-    public ResponseEntity partialUpdateTask(@PathVariable Long id) {
-        //TODO удаление сущности
+    public ResponseEntity deleteProject(@PathVariable UUID id) {
+        projectService.deleteProjectById(id);
 
         return ResponseEntity.ok().build();
-    }
-
-    @ExceptionHandler(IOException.class)
-    public ResponseEntity handleException(IOException e) {
-
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
 }

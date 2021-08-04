@@ -2,8 +2,12 @@ package com.gr1fak.task_tracker.controller;
 
 import com.gr1fak.task_tracker.dto.request.ReleaseRequestDto;
 import com.gr1fak.task_tracker.dto.response.ReleaseResponseDto;
+import com.gr1fak.task_tracker.mapper.ReleaseMapper;
+import com.gr1fak.task_tracker.service.ReleaseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import javassist.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,35 +22,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
-@RequestMapping("/api/releases")
+@RequestMapping("/api/release")
 @Tag(name = "Версии")
 @RestController
 public class ReleaseController {
-    @Operation(summary = "Получить список версий")
-    @GetMapping(value = "/release")
-    public ResponseEntity<List<ReleaseResponseDto>> getRelease() {
-        ReleaseResponseDto release1 = new ReleaseResponseDto("release1", LocalDateTime.now(),
-                LocalDateTime.now());
-        ReleaseResponseDto release2 = new ReleaseResponseDto("release2", LocalDateTime.now(),
-                LocalDateTime.now());
+    private final ReleaseService releaseService;
 
-        List<ReleaseResponseDto> results =  List.of(release1, release2);
-        return ResponseEntity.ok().body(results);
+    @Autowired
+    public ReleaseController(ReleaseService releaseService) {
+        this.releaseService = releaseService;
+    }
+
+    @Operation(summary = "Получить список версий")
+    @GetMapping(value = "/releases")
+    public ResponseEntity<List<ReleaseResponseDto>> getReleases() {
+        List<ReleaseResponseDto> result = releaseService.getAll();
+        return ResponseEntity.ok().body(result);
     }
 
     @Operation(summary = "Добавить версию")
     @PostMapping(value = "/release")
-    public ResponseEntity<ReleaseResponseDto> createTask(@RequestBody ReleaseRequestDto requestDto) {
-        //TODO добавление
-
-        return ResponseEntity.ok().body(new ReleaseResponseDto(requestDto.getName(), requestDto.getBegin(),
-                requestDto.getEnd()));
+    public ResponseEntity<ReleaseResponseDto> createRelease(@RequestBody ReleaseRequestDto requestDto) {
+        ReleaseResponseDto responseDto = releaseService.addRelease(requestDto);
+        return ResponseEntity.ok().body(responseDto);
     }
 
     @Operation(summary = "Обновление версии")
     @PutMapping(value = "/release/{id}")
-    public ResponseEntity<ReleaseResponseDto> partialUpdateTask(@PathVariable Long id,
+    public ResponseEntity<ReleaseResponseDto> partialUpdateRelease(@PathVariable UUID id,
                                                              @RequestBody ReleaseRequestDto requestDto) {
         //TODO обновление сущности
         return ResponseEntity.ok().body(new ReleaseResponseDto(requestDto.getName(), requestDto.getBegin(),
@@ -55,16 +60,10 @@ public class ReleaseController {
 
     @Operation(summary = "Удаление версии")
     @DeleteMapping(value = "/release/{id}")
-    public ResponseEntity partialUpdateTask(@PathVariable Long id) {
-        //TODO удаление сущности
+    public ResponseEntity deleteRelease(@PathVariable UUID id) {
+        releaseService.deleteById(id);
 
         return ResponseEntity.ok().build();
-    }
-
-    @ExceptionHandler(IOException.class)
-    public ResponseEntity handleException(IOException e) {
-
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
 }

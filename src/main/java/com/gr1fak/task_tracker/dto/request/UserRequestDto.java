@@ -6,8 +6,6 @@ import java.util.UUID;
 
 @Schema(description = "Пользователь")
 public class UserRequestDto {
-    @Schema(description = "ID пользователя")
-    private UUID userId;
 
     @Schema(description = "Логин пользователя")
     private String login;
@@ -18,19 +16,10 @@ public class UserRequestDto {
     @Schema(description = "Емайл пользователя")
     private String email;
 
-    public UserRequestDto(UUID userId, String login, String password, String email) {
-        this.userId = userId;
+    public UserRequestDto(String login, String password, String email) {
         this.login = login;
         this.password = password;
         this.email = email;
-    }
-
-    public UUID getUserId() {
-        return userId;
-    }
-
-    public void setUserId(UUID userId) {
-        this.userId = userId;
     }
 
     public String getLogin() {

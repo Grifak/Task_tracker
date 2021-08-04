@@ -5,7 +5,10 @@ import com.gr1fak.task_tracker.dto.response.ProjectResponseDto;
 
 import java.util.UUID;
 
+
 public interface ProjectService {
     ProjectResponseDto getById(UUID id);
     ProjectResponseDto addProject(ProjectRequestDto requestDto);
+    void deleteProjectById(UUID id);
+    //TODO updateProject
 }

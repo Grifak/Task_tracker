@@ -7,8 +7,6 @@ import java.util.UUID;
 
 @Schema(description = "Версия")
 public class ReleaseRequestDto {
-    @Schema(description = "ID версии")
-    private UUID releaseId;
 
     @Schema(description = "Название задачи")
     private String name;
@@ -22,19 +20,10 @@ public class ReleaseRequestDto {
     public ReleaseRequestDto() {
     }
 
-    public ReleaseRequestDto(UUID release_id, String name, LocalDateTime begin, LocalDateTime end) {
-        this.releaseId = release_id;
+    public ReleaseRequestDto(String name, LocalDateTime begin, LocalDateTime end) {
         this.name = name;
         this.begin = begin;
         this.end = end;
-    }
-
-    public UUID getReleaseId() {
-        return releaseId;
-    }
-
-    public void setReleaseId(UUID releaseId) {
-        this.releaseId = releaseId;
     }
 
     public String getName() {

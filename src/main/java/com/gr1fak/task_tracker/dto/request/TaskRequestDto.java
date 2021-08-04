@@ -1,73 +1,61 @@
 package com.gr1fak.task_tracker.dto.request;
 
-import com.gr1fak.task_tracker.dto.enums.TaskStatus;
+import com.gr1fak.task_tracker.enums.TaskStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.UUID;
 
 @Schema(description = "Задача")
 public class TaskRequestDto {
-    @Schema(description = "ID Задача")
-    private UUID taskId;
-
-    @Schema(description = "ID автора")
-    private UUID authorId;
-
-    @Schema(description = "ID проекта")
-    private UUID projectId;
-
-    @Schema(description = "ID версии")
-    private UUID releaseId;
-
     @Schema(description = "Название здачи")
     private String name;
 
     @Schema(description = "Статус задачи")
     private TaskStatus status;
 
+    @Schema(description = "ID автора")
+    private UUID author;
+
+    @Schema(description = "ID проекта")
+    private UUID project;
+
+    @Schema(description = "ID версии")
+    private UUID release;
+
     public TaskRequestDto() {
     }
 
-    public TaskRequestDto(UUID taskId, UUID authorId, UUID projectId,
-                          UUID releaseId, String name, TaskStatus status) {
-        this.taskId = taskId;
-        this.authorId = authorId;
-        this.projectId = projectId;
-        this.releaseId = releaseId;
+    public TaskRequestDto(UUID author, UUID project,
+                          UUID release, String name, TaskStatus status) {
+        this.author = author;
+        this.project = project;
+        this.release = release;
         this.name = name;
         this.status = status;
     }
 
-    public UUID getAuthorId() {
-        return authorId;
+    public UUID getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(UUID authorId) {
-        this.authorId = authorId;
+    public void setAuthor(UUID author) {
+        this.author = author;
     }
 
-    public UUID getProjectId() {
-        return projectId;
+    public UUID getProject() {
+        return project;
     }
 
-    public void setProjectId(UUID projectId) {
-        this.projectId = projectId;
+    public void setProject(UUID project) {
+        this.project = project;
     }
 
-    public UUID getReleaseId() {
-        return releaseId;
+    public UUID getRelease() {
+        return release;
     }
 
-    public void setReleaseId(UUID releaseId) {
-        this.releaseId = releaseId;
-    }
-
-    public UUID getTaskId() {
-        return taskId;
-    }
-
-    public void setTaskId(UUID taskId) {
-        this.taskId = taskId;
+    public void setRelease(UUID release) {
+        this.release = release;
     }
 
     public String getName() {

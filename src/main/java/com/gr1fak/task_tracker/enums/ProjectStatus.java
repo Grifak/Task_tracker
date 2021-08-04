@@ -1,9 +1,9 @@
-package com.gr1fak.task_tracker.dto.enums;
+package com.gr1fak.task_tracker.enums;
 
 public enum ProjectStatus {
-
     NOT_STARTED("Not started"),
-    STARTED("Started");
+    STARTED("Started"),
+    DONE("Done");
 
     private String title;
 

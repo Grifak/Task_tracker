@@ -6,12 +6,13 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
 
 import java.time.LocalDateTime;
-import java.util.UUID;;
+import java.util.UUID;
+import java.util.Set;
 
 @Table(name = "release")
 @Entity
@@ -29,6 +30,10 @@ public class ReleaseEntity {
 
     @Column(name = "ending", nullable = false)
     private LocalDateTime end;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "task_id")
+    Set<TaskEntity> tasks;
 
     public ReleaseEntity(String name, LocalDateTime begin, LocalDateTime end) {
         this.name = name;
