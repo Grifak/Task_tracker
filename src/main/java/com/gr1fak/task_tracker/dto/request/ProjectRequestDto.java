@@ -20,13 +20,7 @@ public class ProjectRequestDto {
     @Schema(description = "Заказдчик проекта")
     private String customer;
 
-
-    public ProjectRequestDto(String name, String description,
-                             ProjectStatus status, String customer) {
-        this.name = name;
-        this.description = description;
-        this.status = status;
-        this.customer = customer;
+    public ProjectRequestDto() {
     }
 
     public String getName() {

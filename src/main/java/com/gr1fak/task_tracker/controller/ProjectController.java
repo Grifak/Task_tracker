@@ -52,9 +52,8 @@ public class ProjectController {
     @PutMapping(value = "/project/{id}")
     public ResponseEntity<ProjectResponseDto> partialUpdateProject(@PathVariable UUID id,
                                                                 @RequestBody ProjectRequestDto requestDto) {
-        //TODO обновление сущности
-        return ResponseEntity.ok().body(new ProjectResponseDto(requestDto.getName(), requestDto.getDescription(),
-                requestDto.getStatus(), requestDto.getCustomer()));
+        ProjectResponseDto responseDto = projectService.updateProject(id, requestDto);
+        return ResponseEntity.ok().body(responseDto);
     }
 
     @Operation(summary = "Удаление проекта")

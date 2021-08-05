@@ -16,12 +16,6 @@ public class UserRequestDto {
     @Schema(description = "Емайл пользователя")
     private String email;
 
-    public UserRequestDto(String login, String password, String email) {
-        this.login = login;
-        this.password = password;
-        this.email = email;
-    }
-
     public String getLogin() {
         return login;
     }

@@ -54,8 +54,7 @@ public class ReleaseController {
     public ResponseEntity<ReleaseResponseDto> partialUpdateRelease(@PathVariable UUID id,
                                                              @RequestBody ReleaseRequestDto requestDto) {
         //TODO обновление сущности
-        return ResponseEntity.ok().body(new ReleaseResponseDto(requestDto.getName(), requestDto.getBegin(),
-                requestDto.getEnd()));
+        return ResponseEntity.ok().body(new ReleaseResponseDto());
     }
 
     @Operation(summary = "Удаление версии")

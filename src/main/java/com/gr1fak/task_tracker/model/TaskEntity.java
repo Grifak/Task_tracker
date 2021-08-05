@@ -1,4 +1,4 @@
-package com.gr1fak.task_tracker.entities;
+package com.gr1fak.task_tracker.model;
 
 import com.gr1fak.task_tracker.enums.TaskStatus;
 
@@ -10,14 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Enumerated;
-import javax.persistence.ManyToMany;
 import javax.persistence.EnumType;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
 
 import java.util.UUID;
-import java.util.Set;
 
 
 @Table(name = "task")

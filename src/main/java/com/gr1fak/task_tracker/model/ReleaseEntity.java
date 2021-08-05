@@ -1,4 +1,4 @@
-package com.gr1fak.task_tracker.entities;
+package com.gr1fak.task_tracker.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

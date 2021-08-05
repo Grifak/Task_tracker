@@ -14,48 +14,40 @@ public class TaskRequestDto {
     private TaskStatus status;
 
     @Schema(description = "ID автора")
-    private UUID author;
+    private UUID authorId;
 
     @Schema(description = "ID проекта")
-    private UUID project;
+    private UUID projectId;
 
     @Schema(description = "ID версии")
-    private UUID release;
+    private UUID releaseId;
 
     public TaskRequestDto() {
     }
 
-    public TaskRequestDto(UUID author, UUID project,
-                          UUID release, String name, TaskStatus status) {
-        this.author = author;
-        this.project = project;
-        this.release = release;
-        this.name = name;
-        this.status = status;
+
+    public UUID getAuthorId() {
+        return authorId;
     }
 
-    public UUID getAuthor() {
-        return author;
+    public void setAuthorId(UUID authorId) {
+        this.authorId = authorId;
     }
 
-    public void setAuthor(UUID author) {
-        this.author = author;
+    public UUID getProjectId() {
+        return projectId;
     }
 
-    public UUID getProject() {
-        return project;
+    public void setProjectId(UUID projectId) {
+        this.projectId = projectId;
     }
 
-    public void setProject(UUID project) {
-        this.project = project;
+    public UUID getReleaseId() {
+        return releaseId;
     }
 
-    public UUID getRelease() {
-        return release;
-    }
-
-    public void setRelease(UUID release) {
-        this.release = release;
+    public void setReleaseId(UUID releaseId) {
+        this.releaseId = releaseId;
     }
 
     public String getName() {

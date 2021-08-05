@@ -54,8 +54,7 @@ public class UserController {
                                                       @RequestBody UserRequestDto requestDto){
         //TODO обновление сущности
 
-        return ResponseEntity.ok().body(new UserResponseDto(requestDto.getLogin(), requestDto.getPassword(),
-                requestDto.getEmail()));
+        return ResponseEntity.ok().body(new UserResponseDto());
     }
 
     @Operation(summary = "Удаление пользователя")

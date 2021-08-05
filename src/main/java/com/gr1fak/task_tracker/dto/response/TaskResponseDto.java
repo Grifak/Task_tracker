@@ -13,11 +13,6 @@ public class TaskResponseDto {
     private TaskStatus status;
 
 
-    public TaskResponseDto( String name, TaskStatus status) {
-        this.name = name;
-        this.status = status;
-    }
-
     public TaskResponseDto() {
 
     }

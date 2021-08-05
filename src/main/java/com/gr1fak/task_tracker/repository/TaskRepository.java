@@ -1,6 +1,6 @@
 package com.gr1fak.task_tracker.repository;
 
-import com.gr1fak.task_tracker.entities.TaskEntity;
+import com.gr1fak.task_tracker.model.TaskEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -20,12 +20,6 @@ public class ReleaseRequestDto {
     public ReleaseRequestDto() {
     }
 
-    public ReleaseRequestDto(String name, LocalDateTime begin, LocalDateTime end) {
-        this.name = name;
-        this.begin = begin;
-        this.end = end;
-    }
-
     public String getName() {
         return name;
     }

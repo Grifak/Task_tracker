@@ -13,12 +13,6 @@ public class UserResponseDto {
     @Schema(description = "Емайл пользователя")
     private String email;
 
-    public UserResponseDto(String login, String password, String email) {
-        this.login = login;
-        this.password = password;
-        this.email = email;
-    }
-
     public UserResponseDto() {
     }
 

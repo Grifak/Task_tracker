@@ -51,7 +51,7 @@ public class TaskController {
     public ResponseEntity<TaskResponseDto> partialUpdateTask(@PathVariable Long id,
                                                              @RequestBody TaskRequestDto requestDto) {
         //TODO обновление сущности
-        return ResponseEntity.ok().body(new TaskResponseDto(requestDto.getName(), requestDto.getStatus()));
+        return ResponseEntity.ok().body(new TaskResponseDto());
     }
 
     @Operation(summary = "Удаление задачи")
@@ -60,11 +60,5 @@ public class TaskController {
 
 
         return ResponseEntity.ok().build();
-    }
-
-    @ExceptionHandler(IOException.class)
-    public ResponseEntity handleException(IOException e) {
-
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 }

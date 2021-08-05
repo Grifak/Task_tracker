@@ -2,7 +2,7 @@ package com.gr1fak.task_tracker.service.impl;
 
 import com.gr1fak.task_tracker.dto.request.ReleaseRequestDto;
 import com.gr1fak.task_tracker.dto.response.ReleaseResponseDto;
-import com.gr1fak.task_tracker.entities.ReleaseEntity;
+import com.gr1fak.task_tracker.model.ReleaseEntity;
 import com.gr1fak.task_tracker.mapper.ReleaseMapper;
 import com.gr1fak.task_tracker.repository.ReleaseRepository;
 import com.gr1fak.task_tracker.service.ReleaseService;
@@ -50,7 +50,7 @@ public class ReleaseServiceImpl implements ReleaseService {
     @Override
     public void deleteById(UUID id) {
         releaseRepository.findById(id).orElseThrow(
-                () -> new NotFoundException(String.format("Release with ID = %d not found", id))
+                () -> new NotFoundException(String.format("Release with ID = %s not found", id))
         );
 
         releaseRepository.deleteById(id);
