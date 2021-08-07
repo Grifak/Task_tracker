@@ -9,7 +9,6 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
     UserResponseDto taskToResponseDto(UserEntity userEntity);
     UserEntity taskRequestDtoToTask(UserRequestDto requestDto);

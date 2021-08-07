@@ -18,10 +18,12 @@ import java.util.UUID;
 @Service
 public class ReleaseServiceImpl implements ReleaseService {
     private ReleaseRepository releaseRepository;
+    private ReleaseMapper releaseMapper;
 
     @Autowired
-    public ReleaseServiceImpl(ReleaseRepository releaseRepository) {
+    public ReleaseServiceImpl(ReleaseRepository releaseRepository, ReleaseMapper releaseMapper) {
         this.releaseRepository = releaseRepository;
+        this.releaseMapper = releaseMapper;
     }
 
     @Transactional
@@ -31,7 +33,7 @@ public class ReleaseServiceImpl implements ReleaseService {
         List<ReleaseResponseDto> responseDtoList = new ArrayList<>();
 
         for(ReleaseEntity releaseEntity: releaseEntities){
-            responseDtoList.add(ReleaseMapper.INSTANCE.releaseToResponseDto(releaseEntity));
+            responseDtoList.add(releaseMapper.releaseToResponseDto(releaseEntity));
         }
 
         return responseDtoList;
@@ -40,10 +42,10 @@ public class ReleaseServiceImpl implements ReleaseService {
     @Transactional
     @Override
     public ReleaseResponseDto addRelease(ReleaseRequestDto requestDto) {
-        ReleaseEntity releaseEntity = ReleaseMapper.INSTANCE.requestDtoToRelease(requestDto);
+        ReleaseEntity releaseEntity = releaseMapper.requestDtoToRelease(requestDto);
         releaseRepository.save(releaseEntity);
 
-        return ReleaseMapper.INSTANCE.releaseToResponseDto(releaseEntity);
+        return releaseMapper.releaseToResponseDto(releaseEntity);
     }
 
     @Transactional
@@ -54,5 +56,19 @@ public class ReleaseServiceImpl implements ReleaseService {
         );
 
         releaseRepository.deleteById(id);
+    }
+
+    @Transactional
+    @Override
+    public ReleaseResponseDto updateRelease(UUID id, ReleaseRequestDto requestDto) {
+        ReleaseEntity releaseEntity = releaseRepository.findById(id).orElseThrow(
+                () -> new NotFoundException(String.format("Release with ID = %s not found", id))
+        );
+
+        releaseEntity.setName(requestDto.getName());
+        releaseEntity.setEnd(requestDto.getEnd());
+        releaseEntity.setBegin(requestDto.getBegin());
+
+        return releaseMapper.releaseToResponseDto(releaseEntity);
     }
 }

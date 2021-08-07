@@ -16,5 +16,11 @@
     <changeSet id="7" author="vadim">
         <tagDatabase tag="v-1.0"/>
     </changeSet>
+
+    <include file="db/changelog/v-2.0/db.changelog-v.2.0.xml"/>
+
+    <changeSet id="10" author="vadim">
+        <tagDatabase tag="v-2.0"/>
+    </changeSet>
     
 </databaseChangeLog>

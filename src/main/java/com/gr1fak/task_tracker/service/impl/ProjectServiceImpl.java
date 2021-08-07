@@ -16,10 +16,12 @@ import java.util.UUID;
 @Service
 public class ProjectServiceImpl implements ProjectService {
     private ProjectRepository projectRepository;
+    private ProjectMapper projectMapper;
 
     @Autowired
-    public ProjectServiceImpl(ProjectRepository projectRepository) {
+    public ProjectServiceImpl(ProjectRepository projectRepository, ProjectMapper projectMapper) {
         this.projectRepository = projectRepository;
+        this.projectMapper = projectMapper;
     }
 
     @Transactional
@@ -29,15 +31,15 @@ public class ProjectServiceImpl implements ProjectService {
                 () -> new NotFoundException(String.format("Project with ID = %s not found", id))
         );
 
-        return ProjectMapper.INSTANCE.projectToResponseDto(projectEntity);
+        return projectMapper.projectToResponseDto(projectEntity);
     }
 
     @Transactional
     @Override
     public ProjectResponseDto addProject(ProjectRequestDto requestDto) {
-        ProjectEntity projectEntity = ProjectMapper.INSTANCE.requestDtoToProject(requestDto);
+        ProjectEntity projectEntity = projectMapper.requestDtoToProject(requestDto);
         projectRepository.save(projectEntity);
-        return ProjectMapper.INSTANCE.projectToResponseDto(projectEntity);
+        return projectMapper.projectToResponseDto(projectEntity);
     }
 
     @Transactional
@@ -50,6 +52,7 @@ public class ProjectServiceImpl implements ProjectService {
         projectRepository.deleteById(id);
     }
 
+    @Transactional
     @Override
     public ProjectResponseDto updateProject(UUID id, ProjectRequestDto requestDto) {
         ProjectEntity entity = projectRepository.findById(id).orElseThrow(
@@ -61,6 +64,6 @@ public class ProjectServiceImpl implements ProjectService {
         entity.setStatus(requestDto.getStatus());
         projectRepository.save(entity);
 
-        return ProjectMapper.INSTANCE.projectToResponseDto(entity);
+        return projectMapper.projectToResponseDto(entity);
     }
 }

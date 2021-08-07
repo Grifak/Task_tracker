@@ -41,22 +41,7 @@ public class ProjectEntity {
     @JoinColumn(name = "task_id")
     private List<TaskEntity> tasks;
 
-    public ProjectEntity(String name, String description, ProjectStatus status, String customer) {
-        this.name = name;
-        this.description = description;
-        this.status = status;
-        this.customer = customer;
-    }
-
     public ProjectEntity() {
-    }
-
-    public UUID getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(UUID projectId) {
-        this.projectId = projectId;
     }
 
     public String getName() {

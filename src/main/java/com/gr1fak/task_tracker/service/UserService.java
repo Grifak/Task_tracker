@@ -9,4 +9,5 @@ public interface UserService {
     UserResponseDto getById(UUID id);
     UserResponseDto addUser(UserRequestDto requestDto);
     void deleteUser(UUID id);
+    UserResponseDto updateUser(UUID id, UserRequestDto requestDto);
 }

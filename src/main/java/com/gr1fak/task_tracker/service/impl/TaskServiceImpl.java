@@ -2,13 +2,9 @@ package com.gr1fak.task_tracker.service.impl;
 
 import com.gr1fak.task_tracker.dto.request.TaskRequestDto;
 import com.gr1fak.task_tracker.dto.response.TaskResponseDto;
-import com.gr1fak.task_tracker.mapper.TaskContext;
 import com.gr1fak.task_tracker.model.TaskEntity;
 import com.gr1fak.task_tracker.mapper.TaskMapper;
-import com.gr1fak.task_tracker.repository.ProjectRepository;
-import com.gr1fak.task_tracker.repository.ReleaseRepository;
 import com.gr1fak.task_tracker.repository.TaskRepository;
-import com.gr1fak.task_tracker.repository.UserRepository;
 import com.gr1fak.task_tracker.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,19 +19,12 @@ import java.util.UUID;
 public class TaskServiceImpl implements TaskService {
 
     private TaskRepository taskRepository;
+    private TaskMapper taskMapper;
 
     @Autowired
-    public TaskServiceImpl(TaskRepository taskRepository) {
+    public TaskServiceImpl(TaskRepository taskRepository, TaskMapper taskMapper) {
         this.taskRepository = taskRepository;
-    }
-
-    @Override
-    public TaskResponseDto getById(UUID id) {
-        TaskEntity entity = taskRepository.findById(id).orElseThrow(
-                () -> new NotFoundException(String.format("Task with ID = %s not found", id))
-        );
-
-        return TaskMapper.INSTANCE.taskToResponseDto(entity);
+        this.taskMapper = taskMapper;
     }
 
     @Transactional
@@ -45,7 +34,7 @@ public class TaskServiceImpl implements TaskService {
         List<TaskResponseDto> responseDtoList = new ArrayList<>();
 
         for(TaskEntity entity: taskEntity){
-            responseDtoList.add(TaskMapper.INSTANCE.taskToResponseDto(entity));
+            responseDtoList.add(taskMapper.taskToResponseDto(entity));
         }
 
         return responseDtoList;
@@ -54,10 +43,10 @@ public class TaskServiceImpl implements TaskService {
     @Transactional
     @Override
     public TaskResponseDto addTask(TaskRequestDto requestDto) {
-        TaskEntity taskEntity = TaskMapper.INSTANCE.taskRequestDtoToTask(requestDto);
+        TaskEntity taskEntity = taskMapper.taskRequestDtoToTask(requestDto);
         taskRepository.save(taskEntity);
 
-        return TaskMapper.INSTANCE.taskToResponseDto(taskEntity);
+        return taskMapper.taskToResponseDto(taskEntity);
     }
 
     @Transactional

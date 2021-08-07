@@ -53,8 +53,8 @@ public class ReleaseController {
     @PutMapping(value = "/release/{id}")
     public ResponseEntity<ReleaseResponseDto> partialUpdateRelease(@PathVariable UUID id,
                                                              @RequestBody ReleaseRequestDto requestDto) {
-        //TODO обновление сущности
-        return ResponseEntity.ok().body(new ReleaseResponseDto());
+        ReleaseResponseDto responseDto = releaseService.updateRelease(id, requestDto);
+        return ResponseEntity.ok().body(responseDto);
     }
 
     @Operation(summary = "Удаление версии")

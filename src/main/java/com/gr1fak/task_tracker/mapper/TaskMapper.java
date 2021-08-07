@@ -5,25 +5,31 @@ import com.gr1fak.task_tracker.dto.response.TaskResponseDto;
 import com.gr1fak.task_tracker.model.TaskEntity;
 import com.gr1fak.task_tracker.repository.ProjectRepository;
 import com.gr1fak.task_tracker.repository.ReleaseRepository;
-import com.gr1fak.task_tracker.repository.TaskRepository;
-import org.mapstruct.Context;
+import com.gr1fak.task_tracker.repository.UserRepository;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
 
+@Mapper(componentModel = "spring")
+public abstract class TaskMapper {
+    @Autowired
+    protected UserRepository userRepository;
+    @Autowired
+    protected ProjectRepository projectRepository;
+    @Autowired
+    protected ReleaseRepository releaseRepository;
 
-@Mapper(componentModel = "spring", uses = {TaskRepository.class, ProjectRepository.class,
-        ReleaseRepository.class})
-public interface TaskMapper {
-    TaskMapper INSTANCE = Mappers.getMapper(TaskMapper.class);
+    public abstract TaskResponseDto taskToResponseDto(TaskEntity entity);
 
+    public TaskEntity taskRequestDtoToTask(TaskRequestDto requestDto){
+        TaskEntity entity = new TaskEntity();
+        entity.setName(requestDto.getName());
+        entity.setStatus(requestDto.getStatus());
+        entity.setAuthor(userRepository.findById(requestDto.getAuthorId()).orElse(null));
+        entity.setRelease(releaseRepository.findById(requestDto.getReleaseId()).orElse(null));
+        entity.setProject(projectRepository.findById(requestDto.getProjectId()).orElse(null));
 
-    TaskResponseDto taskToResponseDto(TaskEntity taskEntity);
-    @Mappings({
-            @Mapping(target = "author", ignore = true),
-            @Mapping(target = "project", ignore = true),
-            @Mapping(target = "release", ignore = true)
-    })
-    TaskEntity taskRequestDtoToTask(TaskRequestDto requestDto, @Context TaskContext ctx);
+        return entity;
+    }
 }

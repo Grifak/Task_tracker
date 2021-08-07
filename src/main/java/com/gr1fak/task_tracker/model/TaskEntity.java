@@ -45,31 +45,10 @@ public class TaskEntity {
     @JoinColumn(name = "release_id")
     private ReleaseEntity release;
 
-    public TaskEntity(UUID id, String name, TaskStatus status,
-                      UserEntity author, ProjectEntity project, ReleaseEntity release) {
-        this.id = id;
-        this.name = name;
-        this.status = status;
-        this.author = author;
-        this.project = project;
-        this.release = release;
-    }
-
-    public TaskEntity(String name, TaskStatus status) {
-        this.name = name;
-        this.status = status;
-    }
 
     public TaskEntity() {
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

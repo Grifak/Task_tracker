@@ -8,7 +8,6 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface ReleaseMapper {
-    ReleaseMapper INSTANCE = Mappers.getMapper(ReleaseMapper.class);
 
     ReleaseResponseDto releaseToResponseDto(ReleaseEntity releaseEntity);
     ReleaseEntity requestDtoToRelease(ReleaseRequestDto releaseRequestDto);

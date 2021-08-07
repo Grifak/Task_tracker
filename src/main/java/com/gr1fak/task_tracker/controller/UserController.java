@@ -52,9 +52,9 @@ public class UserController {
     @PutMapping(value = "/user/{id}")
     public ResponseEntity<UserResponseDto> updateUser(@PathVariable UUID id,
                                                       @RequestBody UserRequestDto requestDto){
-        //TODO обновление сущности
+        UserResponseDto responseDto = userService.updateUser(id, requestDto);
 
-        return ResponseEntity.ok().body(new UserResponseDto());
+        return ResponseEntity.ok().body(responseDto);
     }
 
     @Operation(summary = "Удаление пользователя")

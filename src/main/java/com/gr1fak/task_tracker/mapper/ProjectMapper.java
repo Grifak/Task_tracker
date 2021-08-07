@@ -8,7 +8,6 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface ProjectMapper {
-    ProjectMapper INSTANCE = Mappers.getMapper(ProjectMapper.class);
 
     ProjectResponseDto projectToResponseDto(ProjectEntity projectEntity);
     ProjectEntity requestDtoToProject(ProjectRequestDto projectRequestDto);

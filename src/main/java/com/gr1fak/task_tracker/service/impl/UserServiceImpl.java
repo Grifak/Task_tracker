@@ -16,10 +16,12 @@ import java.util.UUID;
 @Service
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
+    private UserMapper userMapper;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     @Transactional
@@ -29,15 +31,15 @@ public class UserServiceImpl implements UserService {
                 () -> new NotFoundException(String.format("User with ID = %s not found", id))
         );
 
-        return UserMapper.INSTANCE.taskToResponseDto(userEntity);
+        return userMapper.taskToResponseDto(userEntity);
     }
 
     @Transactional
     @Override
     public UserResponseDto addUser(UserRequestDto requestDto) {
-        UserEntity userEntity = UserMapper.INSTANCE.taskRequestDtoToTask(requestDto);
+        UserEntity userEntity = userMapper.taskRequestDtoToTask(requestDto);
         userRepository.save(userEntity);
-        return UserMapper.INSTANCE.taskToResponseDto(userEntity);
+        return userMapper.taskToResponseDto(userEntity);
     }
 
     @Transactional
@@ -48,5 +50,19 @@ public class UserServiceImpl implements UserService {
         );
 
         userRepository.deleteById(id);
+    }
+
+    @Transactional
+    @Override
+    public UserResponseDto updateUser(UUID id, UserRequestDto requestDto) {
+        UserEntity entity = userRepository.findById(id).orElseThrow(
+                ()-> new NotFoundException(String.format("User with ID = %s not found", id))
+        );
+
+        entity.setEmail(requestDto.getEmail());
+        entity.setLogin(requestDto.getLogin());
+        entity.setPassword(requestDto.getPassword());
+
+        return userMapper.taskToResponseDto(entity);
     }
 }

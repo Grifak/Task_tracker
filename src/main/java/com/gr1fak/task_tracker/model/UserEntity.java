@@ -33,22 +33,8 @@ public class UserEntity {
     @ManyToMany
     private Set<TaskEntity> tasks;
 
-    public UserEntity(String login, String password, String email) {
-        this.login = login;
-        this.password = password;
-        this.email = email;
-    }
-
     public UserEntity() {
 
-    }
-
-    public UUID getUserId() {
-        return userId;
-    }
-
-    public void setUserId(UUID userId) {
-        this.userId = userId;
     }
 
     public String getLogin() {

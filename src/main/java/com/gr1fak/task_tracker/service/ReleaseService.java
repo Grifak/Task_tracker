@@ -10,4 +10,5 @@ public interface ReleaseService {
     List<ReleaseResponseDto> getAll();
     ReleaseResponseDto addRelease(ReleaseRequestDto requestDto);
     void deleteById(UUID id);
+    ReleaseResponseDto updateRelease(UUID id, ReleaseRequestDto requestDto);
 }
