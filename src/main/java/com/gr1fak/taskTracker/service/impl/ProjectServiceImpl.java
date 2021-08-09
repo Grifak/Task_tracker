@@ -10,7 +10,6 @@ import com.gr1fak.taskTracker.model.TaskEntity;
 import com.gr1fak.taskTracker.repository.ProjectRepository;
 import com.gr1fak.taskTracker.repository.TaskRepository;
 import com.gr1fak.taskTracker.service.ProjectService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
@@ -25,7 +24,6 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectMapper projectMapper;
     private TaskRepository taskRepository;
 
-    @Autowired
     public ProjectServiceImpl(ProjectRepository projectRepository, ProjectMapper projectMapper,
                               TaskRepository taskRepository) {
         this.projectRepository = projectRepository;
@@ -47,7 +45,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectResponseDto addProject(ProjectRequestDto requestDto) {
         ProjectEntity projectEntity = projectMapper.requestDtoToProject(requestDto);
-        projectRepository.save(projectEntity);
+
         return projectMapper.projectToResponseDto(projectEntity);
     }
 
@@ -71,7 +69,6 @@ public class ProjectServiceImpl implements ProjectService {
         entity.setDescription(requestDto.getDescription());
         entity.setCustomer(requestDto.getCustomer());
         entity.setStatus(requestDto.getStatus());
-        projectRepository.save(entity);
 
         return projectMapper.projectToResponseDto(entity);
     }

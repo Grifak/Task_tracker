@@ -6,7 +6,6 @@ import com.gr1fak.taskTracker.model.UserEntity;
 import com.gr1fak.taskTracker.mapper.UserMapper;
 import com.gr1fak.taskTracker.repository.UserRepository;
 import com.gr1fak.taskTracker.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
@@ -18,7 +17,6 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private UserMapper userMapper;
 
-    @Autowired
     public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
@@ -38,7 +36,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDto addUser(UserRequestDto requestDto) {
         UserEntity userEntity = userMapper.taskRequestDtoToTask(requestDto);
-        userRepository.save(userEntity);
+
         return userMapper.taskToResponseDto(userEntity);
     }
 

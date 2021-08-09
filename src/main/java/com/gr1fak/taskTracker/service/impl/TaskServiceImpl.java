@@ -11,7 +11,6 @@ import com.gr1fak.taskTracker.repository.ReleaseRepository;
 import com.gr1fak.taskTracker.repository.TaskRepository;
 import com.gr1fak.taskTracker.repository.UserRepository;
 import com.gr1fak.taskTracker.service.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
@@ -28,7 +27,6 @@ public class TaskServiceImpl implements TaskService {
     private UserRepository userRepository;
     private ReleaseRepository releaseRepository;
 
-    @Autowired
     public TaskServiceImpl(TaskRepository taskRepository, TaskMapper taskMapper,
                            UserRepository userRepository, ReleaseRepository releaseRepository) {
         this.taskRepository = taskRepository;
@@ -53,8 +51,6 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskResponseDto addTask(TaskRequestDto requestDto) {
         TaskEntity taskEntity = taskMapper.taskRequestDtoToTask(requestDto);
-
-        taskRepository.save(taskEntity);
 
         return taskMapper.taskToResponseDto(taskEntity);
     }

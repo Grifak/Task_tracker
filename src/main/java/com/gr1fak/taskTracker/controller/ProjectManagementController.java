@@ -4,7 +4,6 @@ import com.gr1fak.taskTracker.dto.response.ProjectResponseDto;
 import com.gr1fak.taskTracker.service.ProjectService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,7 +18,6 @@ import java.util.UUID;
 public class ProjectManagementController {
     private ProjectService projectService;
 
-    @Autowired
     public ProjectManagementController(ProjectService projectService) {
         this.projectService = projectService;
     }

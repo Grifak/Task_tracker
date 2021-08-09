@@ -6,7 +6,6 @@ import com.gr1fak.taskTracker.model.ReleaseEntity;
 import com.gr1fak.taskTracker.mapper.ReleaseMapper;
 import com.gr1fak.taskTracker.repository.ReleaseRepository;
 import com.gr1fak.taskTracker.service.ReleaseService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
@@ -20,7 +19,6 @@ public class ReleaseServiceImpl implements ReleaseService {
     private ReleaseRepository releaseRepository;
     private ReleaseMapper releaseMapper;
 
-    @Autowired
     public ReleaseServiceImpl(ReleaseRepository releaseRepository, ReleaseMapper releaseMapper) {
         this.releaseRepository = releaseRepository;
         this.releaseMapper = releaseMapper;
@@ -42,7 +40,6 @@ public class ReleaseServiceImpl implements ReleaseService {
     @Override
     public ReleaseResponseDto addRelease(ReleaseRequestDto requestDto) {
         ReleaseEntity releaseEntity = releaseMapper.requestDtoToRelease(requestDto);
-        releaseRepository.save(releaseEntity);
 
         return releaseMapper.releaseToResponseDto(releaseEntity);
     }

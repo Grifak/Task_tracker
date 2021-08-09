@@ -1,5 +1,7 @@
 package com.gr1fak.taskTracker.enums;
 
+import java.util.Arrays;
+
 public enum TaskStatus {
     BACKLOG("Backlog"),
     IN_PROGRESS("In progress"),
@@ -17,11 +19,11 @@ public enum TaskStatus {
     }
 
     public static TaskStatus fromValue(String value){
-        for(final TaskStatus taskStatus: values()){
-            if(taskStatus.title.equalsIgnoreCase(value)){
-                return taskStatus;
-            }
-        }
-        throw new RuntimeException(String.format("Статуса %s не сущесвтует", value));
+        return Arrays.stream(TaskStatus.values()).
+                filter(v->v.title.equalsIgnoreCase(value)).
+                findFirst().
+                orElseThrow(
+                        ()->new RuntimeException(String.format("Статуса %s не существует", value))
+                );
     }
 }
