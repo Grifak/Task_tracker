@@ -31,8 +31,26 @@
 
     <include file="db/changelog/v-4.0/db.changelog-v.4.0.xml"/>
 
-    <changeSet id="" author="vadim">
+    <changeSet id="15" author="vadim">
         <tagDatabase tag="v-4.0"/>
+    </changeSet>
+
+    <include file="db/changelog/v-4.0/db.changelog-v.4.0.xml"/>
+
+    <changeSet id="17" author="vadim">
+        <tagDatabase tag="add unique in user login"/>
+    </changeSet>
+
+    <include file="db/changelog/v-4.0/db.changelog-v.4.0.xml"/>
+
+    <changeSet id="19" author="vadim">
+        <tagDatabase tag="add userRole and UserStatus to users"/>
+    </changeSet>
+    
+    <include file="db/changelog/v-4.0/db.changelog-v.4.0.xml"/>
+    
+    <changeSet id="21" author="vadim">
+        <tagDatabase tag="increasing the password length"/>
     </changeSet>
     
 </databaseChangeLog>

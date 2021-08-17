@@ -1,5 +1,7 @@
 package com.gr1fak.taskTracker.dto.request;
 
+import com.gr1fak.taskTracker.enums.UserRole;
+import com.gr1fak.taskTracker.enums.UserStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "Пользователь")
@@ -13,6 +15,28 @@ public class UserRequestDto {
 
     @Schema(description = "Емайл пользователя")
     private String email;
+
+    @Schema(description = "Статус пользователя")
+    private UserStatus status;
+
+    @Schema(description = "роль пользователя")
+    private UserRole role;
+
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserStatus status) {
+        this.status = status;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
 
     public String getLogin() {
         return login;
