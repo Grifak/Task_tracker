@@ -6,6 +6,7 @@ import com.gr1fak.taskTracker.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +29,7 @@ public class UserController {
     }
 
     @Operation(summary = "Получить пользователя")
+    @PreAuthorize("hasAuthority('admin:read')")
     @GetMapping(value = "/{id}")
     public ResponseEntity<UserResponseDto> getUser(@PathVariable UUID id){
         UserResponseDto responseDto = userService.getById(id);
@@ -36,6 +38,7 @@ public class UserController {
     }
 
     @Operation(summary = "Добвить пользователя")
+    @PreAuthorize("hasAuthority('admin:write')")
     @PostMapping(value = "/user")
     public ResponseEntity<UserResponseDto> createUser(@RequestBody UserRequestDto requestDto){
         UserResponseDto responseDto = userService.addUser(requestDto);
@@ -44,6 +47,7 @@ public class UserController {
     }
 
     @Operation(summary = "Обновление пользователя")
+    @PreAuthorize("hasAuthority('user:write')")
     @PutMapping(value = "/user/{id}")
     public ResponseEntity<UserResponseDto> updateUser(@PathVariable UUID id,
                                                       @RequestBody UserRequestDto requestDto){
@@ -54,6 +58,7 @@ public class UserController {
 
     @Operation(summary = "Удаление пользователя")
     @DeleteMapping(value = "/user/{id}")
+    @PreAuthorize("hasAuthority('admin:write')")
     public ResponseEntity deleteUser(@PathVariable UUID id){
         userService.deleteUser(id);
         return ResponseEntity.ok().build();

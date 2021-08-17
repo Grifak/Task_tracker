@@ -5,6 +5,7 @@ import com.gr1fak.taskTracker.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -20,6 +21,7 @@ public class TaskManagementController {
     }
 
     @Operation(summary = "Назначение исполнителя")
+    @PreAuthorize("hasAuthority('user:write')")
     @PutMapping("/executor/{taskId}")
     public ResponseEntity<TaskResponseDto> updateExecutor(@PathVariable UUID taskId,
                                                            @RequestParam UUID userId){
@@ -29,6 +31,7 @@ public class TaskManagementController {
     }
 
     @Operation(summary = "Установка релиза")
+    @PreAuthorize("hasAuthority('user:write')")
     @PutMapping("/release/{taskId}")
     public ResponseEntity<TaskResponseDto> updateRelease(@PathVariable UUID taskId,
                                                         @RequestParam UUID releaseId){
@@ -38,6 +41,7 @@ public class TaskManagementController {
     }
 
     @Operation(summary = "Смена статуса задачи")
+    @PreAuthorize("hasAuthority('user:write')")
     @PutMapping("/status/{id}")
     public ResponseEntity<TaskResponseDto> changeStatus(@PathVariable UUID id,
                                                         @RequestParam String status){
@@ -47,6 +51,7 @@ public class TaskManagementController {
     }
 
     @Operation(summary = "Подсчет задач не завршившихся в заданном релизе")
+    @PreAuthorize("hasAuthority('user:write')")
     @GetMapping("/task/{releaseId}")
     public ResponseEntity<Integer> countingIncompleteTask(@PathVariable UUID releaseId){
         Integer count = taskService.countIncompleteTaskInRelease(releaseId);

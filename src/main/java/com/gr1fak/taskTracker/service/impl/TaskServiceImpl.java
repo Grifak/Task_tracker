@@ -51,6 +51,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskResponseDto addTask(TaskRequestDto requestDto) {
         TaskEntity taskEntity = taskMapper.taskRequestDtoToTask(requestDto);
+        taskRepository.save(taskEntity);
 
         return taskMapper.taskToResponseDto(taskEntity);
     }

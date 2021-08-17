@@ -6,6 +6,7 @@ import com.gr1fak.taskTracker.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +29,7 @@ public class TaskController {
     }
 
     @Operation(summary = "Получить список задач")
+    @PreAuthorize("hasAuthority('user:read')")
     @GetMapping(value = "/tasks")
     public ResponseEntity<List<TaskResponseDto>> getTasks() {
         List<TaskResponseDto> tasks = taskService.getAll();
@@ -35,6 +37,7 @@ public class TaskController {
     }
 
     @Operation(summary = "Добавить задачу")
+    @PreAuthorize("hasAuthority('user:write')")
     @PostMapping(value = "/task")
     public ResponseEntity<TaskResponseDto> createTask(@RequestBody TaskRequestDto requestDto) {
         TaskResponseDto responseDto = taskService.addTask(requestDto);
@@ -43,6 +46,7 @@ public class TaskController {
     }
 
     @Operation(summary = "Удаление задачи")
+    @PreAuthorize("hasAuthority('user:write')")
     @DeleteMapping(value = "/task/{id}")
     public ResponseEntity partialUpdateTask(@PathVariable UUID id) {
         taskService.deleteById(id);

@@ -6,14 +6,8 @@ import com.gr1fak.taskTracker.service.ProjectService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -29,6 +23,7 @@ public class ProjectController {
     }
 
     @Operation(summary = "Получить информацию о проекте")
+    @PreAuthorize("hasAuthority('user:write')")
     @GetMapping(value = "/{id}")
     public ResponseEntity<ProjectResponseDto> getProject(@PathVariable UUID id) {
         ProjectResponseDto responseDto = projectService.getById(id);
@@ -36,6 +31,7 @@ public class ProjectController {
     }
 
     @Operation(summary = "Добавить проект")
+    @PreAuthorize("hasAuthority('user:write')")
     @PostMapping(value = "/project")
     public ResponseEntity<ProjectResponseDto> createProject(@RequestBody ProjectRequestDto requestDto) {
         ProjectResponseDto responseDto = projectService.addProject(requestDto);
@@ -44,6 +40,7 @@ public class ProjectController {
     }
 
     @Operation(summary = "Обновление проекта")
+    @PreAuthorize("hasAuthority('user:write')")
     @PutMapping(value = "/project/{id}")
     public ResponseEntity<ProjectResponseDto> partialUpdateProject(@PathVariable UUID id,
                                                                 @RequestBody ProjectRequestDto requestDto) {
@@ -52,11 +49,11 @@ public class ProjectController {
     }
 
     @Operation(summary = "Удаление проекта")
+    @PreAuthorize("hasAuthority('admin:write')")
     @DeleteMapping(value = "/project/{id}")
     public ResponseEntity deleteProject(@PathVariable UUID id) {
         projectService.deleteProjectById(id);
 
         return ResponseEntity.ok().build();
     }
-
 }

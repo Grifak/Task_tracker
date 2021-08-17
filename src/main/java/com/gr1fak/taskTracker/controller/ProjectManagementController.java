@@ -5,6 +5,7 @@ import com.gr1fak.taskTracker.service.ProjectService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ public class ProjectManagementController {
     }
 
     @Operation()
+    @PreAuthorize("hasAuthority('user:write')")
     @PutMapping("/{id}")
     public ResponseEntity<ProjectResponseDto> finishProject(@PathVariable UUID id){
         ProjectResponseDto responseDto = projectService.finishProject(id);

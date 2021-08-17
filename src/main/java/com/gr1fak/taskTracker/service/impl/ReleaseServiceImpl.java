@@ -40,6 +40,7 @@ public class ReleaseServiceImpl implements ReleaseService {
     @Override
     public ReleaseResponseDto addRelease(ReleaseRequestDto requestDto) {
         ReleaseEntity releaseEntity = releaseMapper.requestDtoToRelease(requestDto);
+        releaseRepository.save(releaseEntity);
 
         return releaseMapper.releaseToResponseDto(releaseEntity);
     }
