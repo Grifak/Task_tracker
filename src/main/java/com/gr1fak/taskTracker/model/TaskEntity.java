@@ -1,5 +1,6 @@
 package com.gr1fak.taskTracker.model;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.gr1fak.taskTracker.enums.TaskStatus;
 
 import javax.persistence.Entity;
@@ -19,7 +20,7 @@ import javax.persistence.CascadeType;
 import java.util.UUID;
 import java.util.Set;
 
-
+@JsonPropertyOrder({"name", "status"})
 @Table(name = "task")
 @Entity
 public class TaskEntity {

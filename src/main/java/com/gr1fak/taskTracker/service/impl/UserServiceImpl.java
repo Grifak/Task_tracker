@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDto addUser(UserRequestDto requestDto) {
         UserEntity userEntity = userMapper.taskRequestDtoToTask(requestDto);
+        userRepository.save(userEntity);
 
         return userMapper.taskToResponseDto(userEntity);
     }

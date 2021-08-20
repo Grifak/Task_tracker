@@ -6,6 +6,7 @@ import com.gr1fak.taskTracker.service.ReleaseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +30,7 @@ public class ReleaseController {
     }
 
     @Operation(summary = "Получить список версий")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_USER')")
     @GetMapping(value = "/releases")
     public ResponseEntity<List<ReleaseResponseDto>> getReleases() {
         List<ReleaseResponseDto> result = releaseService.getAll();
@@ -36,6 +38,7 @@ public class ReleaseController {
     }
 
     @Operation(summary = "Добавить версию")
+    @PreAuthorize("hasAuthority('user:write')")
     @PostMapping(value = "/release")
     public ResponseEntity<ReleaseResponseDto> createRelease(@RequestBody ReleaseRequestDto requestDto) {
         ReleaseResponseDto responseDto = releaseService.addRelease(requestDto);
@@ -43,6 +46,7 @@ public class ReleaseController {
     }
 
     @Operation(summary = "Обновление версии")
+    @PreAuthorize("hasAuthority('user:write')")
     @PutMapping(value = "/release/{id}")
     public ResponseEntity<ReleaseResponseDto> partialUpdateRelease(@PathVariable UUID id,
                                                              @RequestBody ReleaseRequestDto requestDto) {
@@ -51,6 +55,7 @@ public class ReleaseController {
     }
 
     @Operation(summary = "Удаление версии")
+    @PreAuthorize("hasAuthority('admin:write')")
     @DeleteMapping(value = "/release/{id}")
     public ResponseEntity deleteRelease(@PathVariable UUID id) {
         releaseService.deleteById(id);

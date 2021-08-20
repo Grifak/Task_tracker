@@ -9,5 +9,10 @@
 
     <include file="db/changelog/v-4.0/01-changeset-release-dropTaskIdColumn.xml"/>
     <include file="db/changelog/v-4.0/02-changeset-task-deleteUniqueInAuthorId-.xml"/>
+    <include file="db/changelog/v-4.0/03-changeset-user-addUniqueInLogin-.xml"/>
+    <include file="db/changelog/v-4.0/04-changeset-user-addUserRoleColumn-.xml"/>
+    <include file="db/changelog/v-4.0/05-changeset-user-addUserStatusColumn-.xml"/>
+    <include file="db/changelog/v-4.0/06-changeset-user-increasePasswordLength-.xml"/>
+    <include file="db/changelog/v-4.0/07-changeset-task-deleteUniqueInProjectId-.xml"/>
 
 </databaseChangeLog>
