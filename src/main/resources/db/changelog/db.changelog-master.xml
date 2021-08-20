@@ -52,5 +52,11 @@
     <changeSet id="21" author="vadim">
         <tagDatabase tag="increasing the password length"/>
     </changeSet>
+
+    <include file="db/changelog/v-4.0/db.changelog-v.4.0.xml"/>
+
+    <changeSet id="23" author="vadim">
+        <tagDatabase tag="delete unique in task project_id"/>
+    </changeSet>
     
 </databaseChangeLog>

@@ -29,31 +29,4 @@ public class ProjectController {
         ProjectResponseDto responseDto = projectService.getById(id);
         return ResponseEntity.ok().body(responseDto);
     }
-
-    @Operation(summary = "Добавить проект")
-    @PreAuthorize("hasAuthority('user:write')")
-    @PostMapping(value = "/project")
-    public ResponseEntity<ProjectResponseDto> createProject(@RequestBody ProjectRequestDto requestDto) {
-        ProjectResponseDto responseDto = projectService.addProject(requestDto);
-
-        return ResponseEntity.ok().body(responseDto);
-    }
-
-    @Operation(summary = "Обновление проекта")
-    @PreAuthorize("hasAuthority('user:write')")
-    @PutMapping(value = "/project/{id}")
-    public ResponseEntity<ProjectResponseDto> partialUpdateProject(@PathVariable UUID id,
-                                                                @RequestBody ProjectRequestDto requestDto) {
-        ProjectResponseDto responseDto = projectService.updateProject(id, requestDto);
-        return ResponseEntity.ok().body(responseDto);
-    }
-
-    @Operation(summary = "Удаление проекта")
-    @PreAuthorize("hasAuthority('admin:write')")
-    @DeleteMapping(value = "/project/{id}")
-    public ResponseEntity deleteProject(@PathVariable UUID id) {
-        projectService.deleteProjectById(id);
-
-        return ResponseEntity.ok().build();
-    }
 }

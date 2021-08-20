@@ -11,6 +11,10 @@ import com.gr1fak.taskTracker.repository.ReleaseRepository;
 import com.gr1fak.taskTracker.repository.TaskRepository;
 import com.gr1fak.taskTracker.repository.UserRepository;
 import com.gr1fak.taskTracker.service.TaskService;
+import com.gr1fak.taskTracker.specification.SearchCriteria;
+import com.gr1fak.taskTracker.specification.TaskSpecificationWithName;
+import com.gr1fak.taskTracker.specification.TaskSpecificationWithStatus;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
@@ -18,6 +22,7 @@ import org.webjars.NotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -115,5 +120,19 @@ public class TaskServiceImpl implements TaskService {
         List<TaskEntity> tasks = taskRepository.getIncompleteTaskInRelease(releaseId);
 
         return tasks.size();
+    }
+
+    @Override
+    public List<TaskResponseDto> findTasks(String name, TaskStatus status) {
+        Specification<TaskEntity> specification = Specification.where(
+                new TaskSpecificationWithName(name))
+                .and(new TaskSpecificationWithStatus(status));
+
+        List<TaskEntity> taskEntities = taskRepository.findAll(specification);
+
+        return taskEntities.stream()
+                .map(t->taskMapper.taskToResponseDto(t))
+                .collect(Collectors.toList());
+
     }
 }

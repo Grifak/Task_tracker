@@ -1,5 +1,6 @@
 package com.gr1fak.taskTracker.controller;
 
+import com.gr1fak.taskTracker.dto.request.TaskRequestDto;
 import com.gr1fak.taskTracker.dto.response.TaskResponseDto;
 import com.gr1fak.taskTracker.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -57,5 +58,23 @@ public class TaskManagementController {
         Integer count = taskService.countIncompleteTaskInRelease(releaseId);
 
         return ResponseEntity.ok().body(count);
+    }
+
+    @Operation(summary = "Добавить задачу")
+    @PreAuthorize("hasAuthority('user:write')")
+    @PostMapping(value = "/task")
+    public ResponseEntity<TaskResponseDto> createTask(@RequestBody TaskRequestDto requestDto) {
+        TaskResponseDto responseDto = taskService.addTask(requestDto);
+
+        return ResponseEntity.ok().body(responseDto);
+    }
+
+    @Operation(summary = "Удаление задачи")
+    @PreAuthorize("hasAuthority('user:write')")
+    @DeleteMapping(value = "/task/{id}")
+    public ResponseEntity partialUpdateTask(@PathVariable UUID id) {
+        taskService.deleteById(id);
+
+        return ResponseEntity.ok().build();
     }
 }
